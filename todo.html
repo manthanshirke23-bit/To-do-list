@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>To Do List</title>
+</head>
+
+<body style="
+    margin:0;
+    min-height:100vh;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+">
+
+<div style="
+    width:90%;
+    max-width:700px;
+    background:rgba(0,0,0,0.75);
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 0 30px cyan;
+    color:white;
+">
+
+<h2 style="
+    text-align:center;
+    color:#00fff0;
+    text-shadow:0 0 10px cyan;
+">⚡TO-DO LIST ⚡</h2>
+
+<form id="todoForm" style="display:grid; gap:12px;">
+
+<input type="text" id="title" placeholder="Task Title" required
+style="
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#111;
+    color:white;
+    outline:none;
+"
+onfocus="this.style.boxShadow='0 0 10px #00fff0'"
+onblur="this.style.boxShadow='none'">
+
+<input type="text" id="description" placeholder="Description" required
+style="
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#111;
+    color:white;
+"
+onmouseover="this.style.background='#222'"
+onmouseout="this.style.background='#111'">
+
+<input type="date" id="dueDate" required
+style="
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#111;
+    color:#00fff0;
+">
+
+<input type="text" id="status" placeholder="Pending / Completed" required
+style="
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#111;
+    color:white;
+"
+onfocus="this.style.background='#003333'"
+onblur="this.style.background='#111'">
+
+<input type="submit" value="➕ ADD TASK"
+style="
+    padding:14px;
+    background:linear-gradient(90deg,#00fff0,#00bcd4);
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+"
+onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 15px cyan'"
+onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+
+</form>
+
+<hr style="margin:20px 0; border-color:#00fff0;">
+
+<table width="100%" cellpadding="10" style="
+    border-collapse:collapse;
+    text-align:center;
+">
+
+<thead style="background:#00fff0; color:black;">
+<tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Due</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="taskTable"></tbody>
+
+</table>
+
+</div>
+
+<script>
+document.getElementById("todoForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const row = document.createElement("tr");
+    row.style.background = "#111";
+    row.style.transition = "0.3s";
+
+    row.onmouseover = () => row.style.background = "#003333";
+    row.onmouseout = () => row.style.background = "#111";
+
+    row.innerHTML = `
+        <td>${title.value}</td>
+        <td>${description.value}</td>
+        <td>${dueDate.value}</td>
+        <td style="color:#00fff0;">${status.value}</td>
+    `;
+
+    document.getElementById("taskTable").appendChild(row);
+    this.reset();
+});
+</script>
+
+</body>
+</html>
